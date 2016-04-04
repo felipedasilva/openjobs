@@ -10,7 +10,7 @@ Projeto construido a partir deste projeto: https://github.com/auth0/nodejs-jwt-a
 
 ## Info
 
-As registros da cidade tem que ser inserido diretamente no mongodb(terminal > mongo). 
+As registros da cidade tem que ser inserido diretamente no mongodb(terminal > mongo). Utilizo o serviço www.mailgun.com para enviar emails, você pricisa configurar isso. 
 
 ## Author
 

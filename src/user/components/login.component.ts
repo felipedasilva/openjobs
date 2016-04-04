@@ -1,4 +1,4 @@
-import { Component }            from 'angular2/core';
+import { Component, OnInit }    from 'angular2/core';
 import { FORM_DIRECTIVES, 
          FormBuilder,
          ControlGroup }         from 'angular2/common';
@@ -12,19 +12,22 @@ let template = require('../static/views/login.html');
 let style    = require('../../common/static/css/form-app.css');
 
 @Component({
-    template: template,
-    styles: [style] ,
-    directives: [FORM_DIRECTIVES]
+    template    : template,
+    styles      : [style] ,
+    directives  : [FORM_DIRECTIVES]
 })
-export class LoginComponent {
-    message:          string;
-    processsRegister: boolean;
-    loginForm:        LoginForm;
-    form:             ControlGroup;
+export class LoginComponent implements OnInit{
+    message          : string;
+    processsRegister : boolean;
+    loginForm        : LoginForm;
+    form             : ControlGroup;
     
     constructor(private _builder: FormBuilder, private _http: Http, private _router: Router) {
+    }
+    
+    ngOnInit() {
         this.loginForm = new LoginForm();
-        this.form      = this.loginForm.getControlGroup(_builder);
+        this.form      = this.loginForm.getControlGroup(this._builder);
     }
  
     submitData() {

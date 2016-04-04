@@ -1,4 +1,4 @@
-import { Component }            from 'angular2/core';
+import { Component, OnInit }    from 'angular2/core';
 import { FORM_DIRECTIVES, 
          FormBuilder,
          ControlGroup }         from 'angular2/common';
@@ -12,19 +12,22 @@ let template = require('../static/views/form.html');
 let style    = require('../../common/static/css/form-app.css');
 
 @Component({
-    template: template,
-    styles: [style],
-    directives: [FORM_DIRECTIVES]
+    template    : template,
+    styles      : [style],
+    directives  : [FORM_DIRECTIVES]
 })
-export class UserRegisterComponent {
-    message:    string;
-    processsRegister: boolean;
-    userForm:   UserForm;
-    form:       ControlGroup;
+export class UserRegisterComponent implements OnInit{
+    message          : string;
+    processsRegister : boolean;
+    userForm         : UserForm;
+    form             : ControlGroup;
     
     constructor(private _builder: FormBuilder, private _http: Http, private _router: Router) {
+    }
+    
+    ngOnInit() {
         this.userForm = new UserForm();
-        this.form     = this.userForm.getControlGroup(_builder);
+        this.form     = this.userForm.getControlGroup(this._builder);
     }
     
     submitData() {
