@@ -1,0 +1,29 @@
+<div class="signup center-block jumbotron">
+    <h1>Cadastrar</h1>
+    <h3 *ngIf="message">
+        {{message}}
+    </h3>
+    <form role="form" (submit)="signup($event, name.value, email.value, phone.value, password.value, repassword.value)">
+        <div class="form-group">
+            <label for="name">Nome *</label>
+            <input type="text" #name class="form-control" id="name" placeholder="Nome">
+        </div>
+        <div class="form-group">
+            <label for="email">Email *</label>
+            <input type="text" #email class="form-control" id="email" placeholder="Email">
+        </div>
+        <div class="form-group">
+            <label for="phone">Celular *</label>
+            <input type="text" #phone class="form-control" id="phone" placeholder="Celular">
+        </div>
+        <div class="form-group">
+            <label for="password">Senha *</label>
+            <input type="text" #password class="form-control" id="password" placeholder="Senha">
+        </div>
+        <div class="form-group">
+            <label for="repassword">Confirmar senha</label>
+            <input type="password" #repassword class="form-control" id="repassword" placeholder="Confirmar senha">
+        </div>
+        <button type="submit" class="btn btn-default">Criar</button>
+    </form>
+</div>

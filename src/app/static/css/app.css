@@ -1,0 +1,12 @@
+header {
+    background: #3F51B5;
+    padding: 2em;
+    color: #fff;
+    font-weight: bolder;
+    position: relative;
+    overflow: hidden;
+}
+
+header a {
+    color: #fff;
+}

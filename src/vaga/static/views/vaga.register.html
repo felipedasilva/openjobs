@@ -1,0 +1,57 @@
+<div class='container'>
+    <div class='row-fluid'>
+        <div class='col-md-8 col-md-offset-2'>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="text-center">Adicionar uma vaga</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="row-fluid">
+                        <div [class]="successSubmit ? 'alert alert-success' : 'alert alert-danger'" *ngIf="message">
+                            {{message}}
+                        </div>
+                        <form [ngFormModel]="form" class="form-app">
+                            <div class="form-group">
+                                <label for="title">Título</label>
+                                <input type="text" #title [ngFormControl]="vagaForm.title" class="form-control" id="title" placeholder="Ex.: Desenvolvedor full-stack">
+                                <div *ngIf="vagaForm.title.dirty && !vagaForm.title.valid">
+                                    <div class="alert alert-danger" *ngIf="vagaForm.title.hasError('required')">Campo título é obrigatório.</div>
+                                    <div class="alert alert-danger" *ngIf="vagaForm.title.hasError('minlength') || vagaForm.title.hasError('maxlength')">Campo título tem possuir de 8 à 60 caracteres.</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="type">Tipo de emprego</label>
+                                <input type="text" #type [ngFormControl]="vagaForm.type" class="form-control" id="type" placeholder="Ex.: Programador, Ti">
+                                <div *ngIf="vagaForm.type.dirty && !vagaForm.type.valid">
+                                    <div class="alert alert-danger" *ngIf="vagaForm.type.hasError('required')">Campo tipo é obrigatório.</div>
+                                    <div class="alert alert-danger" *ngIf="vagaForm.type.hasError('maxlength')">Campo tipo pode possuir até 80 caracteres.</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="description">Descrição</label>
+                                <textarea #description [ngFormControl]="vagaForm.description" class="form-control" id="description" placeholder="Ex.: Experiências, empresa, formação">
+                                </textarea>
+                                <div *ngIf="vagaForm.description.dirty && !vagaForm.description.valid">
+                                    <div class="alert alert-danger" *ngIf="vagaForm.description.hasError('required')">Campo descrição é obrigatório.</div>
+                                    <div class="alert alert-danger" *ngIf="vagaForm.description.hasError('minlength')">Campo descrição tem que possuir no mínimo 10 caracteres.</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="cidade">Cidade</label>
+                                <select #cidade [ngFormControl]="vagaForm.cidade" class="form-control" id="cidade">
+                                    <option value="">Selecione a cidade ...</option>
+                                    <option *ngFor="#cidade of cidades" [value]="cidade.id">{{cidade.name}} - {{cidade.estado.initials}}</option>
+                                </select>
+                                <div *ngIf="vagaForm.cidade.dirty && !vagaForm.cidade.valid">
+                                    <div class="alert alert-danger" *ngIf="vagaForm.cidade.hasError('required')">Campo cidade é obrigatório.</div>
+                                </div>
+                            </div>
+                            
+                            <button type="button" (click)="onSubmit()" [disabled]="!form.valid || processSubmit" class="btn btn-block btn-primary">Enviar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

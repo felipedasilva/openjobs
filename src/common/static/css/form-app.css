@@ -1,0 +1,64 @@
+.panel {
+    margin-top: 20px;
+}
+
+.form-app {
+    margin-bottom: 20px;
+}
+
+.panel .form-app {
+    margin-bottom: 0 !important;
+}
+
+.form-app input, .form-app textarea, select {
+    border-radius: 0;
+    outline-color: none !important;
+    box-shadow: none;
+    border: 1px solid #ccc;
+    font-weight: bold;
+    border-left-width: 4px;
+}
+
+.form-app input[type="file"] {
+    padding: 5px;
+}
+
+.form-app input {
+    padding: 1em;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.form-app textarea {
+    max-width: 100%;
+    min-height: 200px;
+}
+
+.form-app input:focus, .form-app textarea:focus {
+    border-left-color: #777;
+}
+.form-app .title span{
+    color: #555;
+}
+.form-app button {
+    margin-top: 5px;
+}
+.form-app .alert {
+    border-top: 0;
+    border-radius: 0;
+    margin-bottom: 0;
+    padding: 6px;
+}
+
+.form-app .btn-primary{
+    background: #757575;
+    border-color: #757575;
+}
+
+.form-app .ng-dirty.ng-invalid {
+    border-left-color:  #DD2C00;
+}
+
+.form-app .ng-valid {
+    border-left-color: #43A047; 
+}

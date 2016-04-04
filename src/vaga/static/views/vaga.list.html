@@ -1,0 +1,111 @@
+<div class='container'>
+    <div class='row-fluid'>
+        <div class="col-md-5">
+            <h1>Lista de empregos</h1>
+            <div class="list-vaga">
+                <div class="item-list-vaga" *ngFor="#vaga of vagas">
+                    <div class="row">
+                        <div class="col-md-4">
+                            {{vaga.title}}            
+                        </div>
+                        <div class="col-md-4" *ngIf="vaga.cidade">
+                            {{vaga.cidade.name}} - {{vaga.cidade.estado.initials}}
+                        </div>
+                        <div class="col-md-2">
+                            {{vaga.created_at | date:'mediumDate'}}
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <button class="btn btn-default" (click)="selectedVaga = vaga">+</button>
+                        </div>
+                    </div>
+                </div>              
+            </div>
+            <b><a href="{{api_vaga_route}}">Api lista vagas: {{api_vaga_route}}</a></b>
+        </div>
+        <div class="col-md-7 item-vaga-detail">
+            <div class="container-fluid" *ngIf="selectedVaga">
+                <h2 class="text-center">{{selectedVaga.title}}</h2>
+                <div class="row text-center item-vaga-info">
+                    <div class="col-md-4">
+                        <b>Tipo:</b> {{selectedVaga.type}}
+                    </div>
+                    <div class="col-md-4">
+                        <b>Cidade:</b> {{selectedVaga.cidade.name}} - {{selectedVaga.cidade.estado.initials}}
+                    </div>
+                    <div class="col-md-4">
+                        <b>Data:</b> {{selectedVaga.created_at | date:'mediumDate'}}
+                    </div>
+                </div>
+                <div class="row item-vaga-desc">
+                    <b>Descrição:</b> {{selectedVaga.description}}
+                </div>
+                <div *ngIf="!openCurriculum">
+                    <button type="button" (click)="openCurriculum = true" class="btn btn-default">Candidatar-se</button>
+                </div>
+                <div *ngIf="openCurriculum">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div style="margin-bottom: 0;" [class]="successSubmit ? 'alert alert-success' : 'alert alert-danger'" *ngIf="message">
+                                {{message}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row form-app">
+                        <form [ngFormModel]="form" enctype="multipart/form-data">
+                            <div class="row-fluid">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="name">Nome</label>
+                                        <input type="text" #name [ngFormControl]="candidatoForm.name" class="form-control" id="name" placeholder="Seu nome">
+                                        <div *ngIf="candidatoForm.name.dirty && !candidatoForm.name.valid">
+                                            <div class="alert alert-danger" *ngIf="candidatoForm.name.hasError('required')">Campo nome é obrigatório.</div>
+                                            <div class="alert alert-danger" *ngIf="candidatoForm.name.hasError('minlength') || candidatoForm.name.hasError('maxlength')">Campo nome tem possuir de 8 à 30 caracteres.</div>
+                                        </div>
+                                    </div> 
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="email">Email</label>
+                                        <input type="email" [ngFormControl]="candidatoForm.email" #email class="form-control" id="email" placeholder="email@email.com">
+                                        <div *ngIf="candidatoForm.email.dirty && !candidatoForm.email.valid">
+                                            <div class="alert alert-danger" *ngIf="candidatoForm.email.hasError('required')">Campo email é obrigatório.</div>
+                                            <div class="alert alert-danger" *ngIf="candidatoForm.email.hasError('incorrectMailFormat')">Campo email inválido.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row-fluid">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="description">Mensagem</label>
+                                        <textarea #description [ngFormControl]="candidatoForm.description" class="form-control" id="description" placeholder="Ex.: Experiências, empresa, formação">
+                                        </textarea>
+                                        <div *ngIf="candidatoForm.description.dirty && !candidatoForm.description.valid">
+                                            <div class="alert alert-danger" *ngIf="candidatoForm.description.hasError('required')">Campo descrição é obrigatório.</div>
+                                            <div class="alert alert-danger" *ngIf="candidatoForm.description.hasError('minlength')">Campo descrição tem que possuir no mínimo 10 caracteres.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <label for="link">Link</label>
+                                    <input type="url" #link [ngFormControl]="candidatoForm.link" class="form-control" id="link" placeholder="Ex.: LinkedIn, Curriculum online">
+                                    <div *ngIf="candidatoForm.link.dirty && !candidatoForm.link.valid">
+                                        <div class="alert alert-danger" *ngIf="candidatoForm.link.hasError('required')">Campo link é obrigatório.</div>
+                                    </div>
+                                </div>
+                            </div> 
+                            <div class="row-fluid">
+                                <div class="col-md-12" style="padding: 14px;">
+                                    <button type="button" (click)="onSubmit()" [disabled]="!form.valid || processSubmit" class="btn btn-primary">Enviar</button>
+                                    <button type="button" (click)="closeCurriculum()" class="btn btn-default">Fechar</button>
+                                </div>
+                            </div>
+                        </form> 
+                    </div>
+                </div>
+            </div>
+        </div>  
+    </div>
+</div>
