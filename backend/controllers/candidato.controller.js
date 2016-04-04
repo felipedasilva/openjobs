@@ -4,9 +4,9 @@ const _       = require('lodash'),
       Mailgun = require('mailgun-js');
 
 //consulte: http://blog.mailgun.com/how-to-send-transactional-emails-in-a-nodejs-app-using-the-mailgun-api/
-const api_key   = 'key-627cb354d9ea01a5266470a712b39865';
-const domain    = 'sandbox577eec398ece443ebd7ba38da027337b.mailgun.org';
-const from_who  = 'postmaster@sandbox577eec398ece443ebd7ba38da027337b.mailgun.org';
+const api_key   = 'APIKEY';
+const domain    = 'DOMAIN.mailgun.org';
+const from_who  = 'postmaster@FROM_WHO.mailgun.org';
 
 const sendMail = (Vaga, Candidato, res) => {
     const body = '<div><h5>Nome: '+Candidato.name+', Email: '+Candidato.email+'</h5><p><b>Mensagem: '+Candidato.description+'</b></p><p><b>Link: </b> '+Candidato.link+'</p></div>';
